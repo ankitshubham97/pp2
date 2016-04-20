@@ -1,0 +1,57 @@
+package pong;
+
+import java.io.IOException;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+
+import pong.Tennis;
+
+
+
+public class GameClient extends Thread{
+
+	private InetAddress ipAddress;
+	private DatagramSocket socket;
+	private Tennis tennis;
+	
+	
+	
+	public GameClient(Tennis tennis, String ipAddress){
+		this.tennis=tennis;
+		try {
+			this.socket=new DatagramSocket();
+		this.ipAddress = InetAddress.getByName(ipAddress);
+		} catch (SocketException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void run() {
+		while (true) {
+			byte[] data = new byte[1024];
+			DatagramPacket packet = new DatagramPacket(data,data.length);
+			try {
+				socket.receive(packet);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			System.out.println("SERVER> "+new String(packet.getData()));
+		}
+	}
+	
+	public void sendData(byte[] data) {
+		DatagramPacket packet = new DatagramPacket(data, data.length, ipAddress, 1331);  //any port above 1024
+		try {
+			socket.send(packet);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+}
