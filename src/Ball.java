@@ -36,6 +36,7 @@ public class Ball {
          else if(x + size >=game.getWidth()){
              game.p2score= game.p2score-1;
              vx = - speed;
+             int t;
          }
          if(y <= 0){
              game.p3score= game.p3score-1;
