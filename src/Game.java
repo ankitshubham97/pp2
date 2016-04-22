@@ -85,9 +85,9 @@ public class Game extends Canvas implements Runnable{
         gameRunning = false;
         
         player = new PlayerPaddle(10,60);
-        ai = new AIPaddle(getWidth()+8-25,60);
-        playerup = new PlayerPaddleUp(getWidth()/2-20,40);
-        playerdown = new PlayerPaddleUp(getWidth()/2-20,getHeight()+8-25);
+        ai = new AIPaddle(getWidth()+10-25,60);
+        playerup = new PlayerPaddleUp(getWidth()/2-20,10);
+        playerdown = new PlayerPaddleUp(getWidth()/2-20,getHeight()+10-25);
         ball =new Ball(getWidth()/2,getHeight()/2);
         p1score=03;
         p2score=03;
@@ -112,37 +112,91 @@ public class Game extends Canvas implements Runnable{
         Graphics g = bs.getDrawGraphics();
         g.setColor(Color.black);
         g.drawImage( image,  0, 0, getWidth(),getHeight(),null);
+        g.setColor(Color.white);
+        g.fillRect(10, 0, 15, getHeight());
+        g.fillRect(getWidth()-25, 0, 15, getHeight());
+        g.fillRect(0, 10, getWidth(), 15);
+        g.fillRect(0,getHeight()-25, getWidth(), 15);
         g.setColor(Color.red);
-        g.drawString(p1score+"", ((int)player.x)+6, ((int)player.y));
-        g.drawString(""+p2score, ((int)ai.x)+6, ((int)ai.y));
-        g.drawString(p3score+"", ((int)playerup.x)+19, ((int)playerup.y));
-        g.drawString(""+p4score, ((int)playerdown.x)+19, ((int)playerdown.y));
+        /*g.drawString(p1score+"", ((int)player.x)+13+7, ((int)player.y)+20);
+        g.drawString(""+p2score, ((int)ai.x)-5, ((int)ai.y)+20);
+        g.drawString(p3score+"", ((int)playerup.x)+19, ((int)playerup.y)+25);
+        g.drawString(""+p4score, ((int)playerdown.x)+19, ((int)playerdown.y)+25);*/
         
         if(p1score<0){
             gameRunning = false;
             JOptionPane.showMessageDialog(null, "Left player loses.");
-            System.exit(0);
+            int response = JOptionPane.showConfirmDialog(null, "Do you want to restart?", "Restart Game?",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.NO_OPTION) {
+              System.exit(0);
+                } 
+            else if (response == JOptionPane.YES_OPTION) {
+                frame.dispose();
+              new MainMenu();
+                } 
+            else if (response == JOptionPane.CLOSED_OPTION) {
+              System.exit(0);
+                }
         }
         if(p2score<0){
             gameRunning = false;
             JOptionPane.showMessageDialog(null, "Right player loses.");
-            System.exit(0);
+            int response = JOptionPane.showConfirmDialog(null, "Do you want to restart?", "Restart Game?",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.NO_OPTION) {
+              System.exit(0);
+                } 
+            else if (response == JOptionPane.YES_OPTION) {
+                frame.dispose();
+              new MainMenu();
+                } 
+            else if (response == JOptionPane.CLOSED_OPTION) {
+              System.exit(0);
+                }
         }
         if(p3score<0){
             gameRunning = false;
             JOptionPane.showMessageDialog(null, "Up player loses.");
-            System.exit(0);
+            int response = JOptionPane.showConfirmDialog(null, "Do you want to restart?", "Restart Game?",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.NO_OPTION) {
+              System.exit(0);
+                } 
+            else if (response == JOptionPane.YES_OPTION) {
+                frame.dispose();
+              new MainMenu();
+                } 
+            else if (response == JOptionPane.CLOSED_OPTION) {
+              System.exit(0);
+                }
         }
         if(p4score<0){
             gameRunning = false;
             JOptionPane.showMessageDialog(null, "Down player loses.");
-            System.exit(0);
+            int response = JOptionPane.showConfirmDialog(null, "Do you want to restart?", "Restart Game?",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (response == JOptionPane.NO_OPTION) {
+              System.exit(0);
+                } 
+            else if (response == JOptionPane.YES_OPTION) {
+                frame.dispose();
+              new MainMenu();
+                } 
+            else if (response == JOptionPane.CLOSED_OPTION) {
+              System.exit(0);
+                }
         }
         player.render(g);
         playerup.render(g);
         playerdown.render(g);
         ai.render(g);
         ball.render(g);
+        g.setColor(Color.red);
+        g.drawString(p1score+"", ((int)player.x)+5, ((int)player.y)+23);
+        g.drawString(""+p2score, ((int)ai.x)+5, ((int)ai.y)+23);
+        g.drawString(p3score+"", ((int)playerup.x)+16, ((int)playerup.y)+12);
+        g.drawString(""+p4score, ((int)playerdown.x)+16, ((int)playerdown.y)+12);
         g.dispose();
         bs.show();
         

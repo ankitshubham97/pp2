@@ -16,7 +16,7 @@ public class InputHandler implements KeyListener{
     public InputHandler(Game game1){
         
         game1.addKeyListener(this);
-        game =game1;
+        game = game1;
     }
     public void keyTyped(KeyEvent e) {
         int keyCode = e.getKeyCode();

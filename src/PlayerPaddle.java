@@ -36,6 +36,12 @@ public class PlayerPaddle {
         if(goingDown && y + height < game.getHeight()){
             y = y+ speed;
         }
+        if(y <25){
+                y = 25;
+            }
+            if(y + height > game.getHeight()-25){
+                y = - height + game.getHeight()-25;
+            }
     }
     public void render ( Graphics g){
         g.setColor(Color.blue);

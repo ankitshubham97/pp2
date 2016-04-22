@@ -18,6 +18,12 @@ public class Ball {
     double vx,vy;
     double speed = 0.10;
     Rectangle boundingBox;
+    //int range = (max - min) + 1;     
+    //return (int)(Math.random() * range) + min;
+    int max=7;
+    int min=0;
+    int range = (max - min) + 1;     
+    
     
     public Ball(double x, double y ){
         this.x = x;
@@ -31,12 +37,11 @@ public class Ball {
         boundingBox.setBounds((int)x,(int)y,size,size);
          if(x<=0){
              game.p1score= game.p1score-1;
-             vx = speed;
+             vx = speed ;
          }
          else if(x + size >=game.getWidth()){
              game.p2score= game.p2score-1;
-             vx = - speed;
-             int t;
+             vx = - speed ;
          }
          if(y <= 0){
              game.p3score= game.p3score-1;
@@ -54,18 +59,20 @@ public class Ball {
     }
     
     private void paddleCollide(Game game){
+        int rand1 = (int)(Math.random() * range) + min-2;
+         double rand = (double)rand1/100;
         if(boundingBox.intersects(game.player.boundingBox)){
-            vx = speed;
+            vx = speed+rand;
             
         }
         else if(boundingBox.intersects(game.ai.boundingBox)){
-            vx = -speed;
+            vx = -speed+rand;
         }
         else if(boundingBox.intersects(game.playerup.boundingBox)){
-            vy = speed;
+            vy = speed+rand;
         }
         else if(boundingBox.intersects(game.playerdown.boundingBox)){
-            vy = -speed;
+            vy = -speed+rand;
         }
     }
      public void render (Graphics g){
