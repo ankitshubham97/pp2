@@ -12,9 +12,10 @@ import java.awt.Rectangle;
  *
  * @author ANKIT
  */
+ // This is the computer controlled paddle.
 public class AIPaddle {
     double x;
-    double y;
+    double y;// coordinates
     int width = 15;
     int height = 40;
     
@@ -30,13 +31,14 @@ public class AIPaddle {
         this.x = x;
         this.y = y;
         boundingBox = new Rectangle((int)x,(int)y,width,height);
-        boundingBox.setBounds((int)x,(int)y,width,height);
+        boundingBox.setBounds((int)x,(int)y,width,height); // bounding with rectangle, helpful while detecting colloision
         
     }
     public void tick (Game game){
         
         boundingBox.setBounds((int)x,(int)y,width,height);
         if(!is4Player){
+            //setting speed for difficulty level
             if(diff_level ==1){
                 speed = 0.09;
             }
@@ -53,6 +55,7 @@ public class AIPaddle {
             if(game.ball.y > y && y + height < game.getHeight()){
                 y = y+ speed;
             }
+            //setting that paddle does not go out of game window
             if(y <25){
                 y = 25;
             }
@@ -61,6 +64,7 @@ public class AIPaddle {
             }
         }
         else{
+            //moving the paddle
             if(goingUp && y >0){
                 y -=speed;
             }
@@ -70,6 +74,7 @@ public class AIPaddle {
         }
         
     }
+    //rendering the paddle
     public void render ( Graphics g){
         g.setColor(Color.blue);
         g.fillRect((int)x, (int)y, width, height);
