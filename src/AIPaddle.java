@@ -12,10 +12,10 @@ import java.awt.Rectangle;
  *
  * @author ANKIT
  */
- // This is the computer controlled paddle.
+ // This is the computer controlled paddle. 
 public class AIPaddle {
     double x;
-    double y;// coordinates
+    double y;// coordinates 
     int width = 15;
     int height = 40;
     
