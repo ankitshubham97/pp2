@@ -12,11 +12,12 @@ import java.awt.Rectangle;
  *
  * @author ANKIT
  */
+ //this is the user's paddle class
 public class PlayerPaddle {
     double x;
     double y;
     int width = 15;
-    int height = 40;
+    int height = 40;//coordinates
     double speed =0.15;
     Rectangle boundingBox;
     boolean goingUp = false;
@@ -26,16 +27,18 @@ public class PlayerPaddle {
         this.x = x;
         this.y = y;
         boundingBox = new Rectangle((int)x,(int)y,width,height);
-        boundingBox.setBounds((int)x,(int)y,width,height);
+        boundingBox.setBounds((int)x,(int)y,width,height);// bounding with rectangle, helpful while detecting colloision
     }
     public void tick (Game game){
         boundingBox.setBounds((int)x,(int)y,width,height);
+        //moving the paddle
         if(goingUp && y >0){
             y= y- speed;
         }
         if(goingDown && y + height < game.getHeight()){
             y = y+ speed;
         }
+        //seeing that paddle does not move out of the window
         if(y <25){
                 y = 25;
             }
