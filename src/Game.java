@@ -20,6 +20,8 @@ import javax.swing.JOptionPane;
  *
  * @author ANKIT
  */
+ 
+ // this is the prime class where all the action is happening!
 public class Game extends Canvas implements Runnable{
     private static final long serialVersionUID = 1L;
     public static PlayerPaddle player;
@@ -29,19 +31,24 @@ public class Game extends Canvas implements Runnable{
     public static Ball ball;
     InputHandler IH;
     JFrame frame;
+    
+    //params for jframe: 
     public final int WIDTH = 400;
     public final int HEIGHT = WIDTH ;
     public final Dimension gameSize = new Dimension(WIDTH,HEIGHT);
     public final String TITLE = "Ping Pong";
     public int ScreenWidth;
     public int ScreenHeight;
+    
+    //scores of players:
     int p1score,p2score,p3score,p4score;
     BufferedImage image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
     public boolean gameRunning ;
     
     public void run(){
         if(gameRunning){
-            System.out.println("something");
+            //just for debugging!
+            //System.out.println("something");
             while(gameRunning){
                 tick();
                 render();
@@ -71,6 +78,8 @@ public class Game extends Canvas implements Runnable{
         this.setPreferredSize(gameSize);
         this.setMaximumSize(gameSize);
         
+        
+        //doing settings for the frame:
         frame.add(this,BorderLayout.CENTER);
         frame.pack();
         
@@ -84,11 +93,14 @@ public class Game extends Canvas implements Runnable{
         IH = new InputHandler(this);
         gameRunning = false;
         
+        //positioning different paddles!
         player = new PlayerPaddle(10,60);
         ai = new AIPaddle(getWidth()+10-25,60);
         playerup = new PlayerPaddleUp(getWidth()/2-20,10);
         playerdown = new PlayerPaddleUp(getWidth()/2-20,getHeight()+10-25);
         ball =new Ball(getWidth()/2,getHeight()/2);
+        
+        //initial scores:
         p1score=03;
         p2score=03;
         p3score=03;
@@ -103,6 +115,9 @@ public class Game extends Canvas implements Runnable{
         ai.tick(this);
         ball.tick(this);
     }
+    
+    
+    //for displaying the stuffs:
     public void render(){
         BufferStrategy bs = getBufferStrategy();
         if(bs == null){
