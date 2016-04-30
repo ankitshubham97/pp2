@@ -33,18 +33,23 @@ public class Ball {
         boundingBox = new Rectangle((int)x,(int)y,size,size);
         boundingBox.setBounds((int)x,(int)y,size,size);
     }
+    
+    //this facilitates general motion of the ball
     public void tick (Game game){
         boundingBox.setBounds((int)x,(int)y,size,size);
          if(x<=0){
              game.p1score= game.p1score-1;
+             //score down
              vx = speed ;
          }
          else if(x + size >=game.getWidth()){
              game.p2score= game.p2score-1;
+             //score down
              vx = - speed ;
          }
          if(y <= 0){
              game.p3score= game.p3score-1;
+             //score down
              vy = speed;
          }
          else if (y + size >=game.getHeight()){
@@ -55,12 +60,15 @@ public class Ball {
         x = x+vx;
         y = y+vy;
         
+        //call to check its collision with paddle
         paddleCollide(game);
     }
     
     private void paddleCollide(Game game){
         int rand1 = (int)(Math.random() * range) + min-2;
          double rand = (double)rand1/100;
+         
+        //below code detect the collision in the 4 possible cases
         if(boundingBox.intersects(game.player.boundingBox)){
             vx = speed+rand;
             
@@ -75,6 +83,8 @@ public class Ball {
             vy = -speed+rand;
         }
     }
+    
+    //painting the modified stuff
      public void render (Graphics g){
         g.setColor(Color.red);
         g.fillOval((int)x, (int)y, size, size);
