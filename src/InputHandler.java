@@ -11,6 +11,8 @@ import java.awt.event.KeyListener;
  *
  * @author ANKIT
  */
+ 
+ // this class is for handling the input (keystrokes) from player
 public class InputHandler implements KeyListener{
     Game game;
     public InputHandler(Game game1){
