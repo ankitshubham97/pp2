@@ -12,6 +12,7 @@ import javax.sound.sampled.Clip;
  *
  * @author ANKIT
  */
+ //class which has the main method.
 public class Launcher {
     public static void main(String[] args){
         new MainMenu() ;
